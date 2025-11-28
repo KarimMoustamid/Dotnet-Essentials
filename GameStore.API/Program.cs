@@ -13,6 +13,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+const string GetGameEndpointName = "GetGame";
+
 List<Game> games = new List<Game>
 {
     new Game
@@ -43,5 +45,42 @@ List<Game> games = new List<Game>
 
 app.MapGet("/", () => "Hello World!");
 app.MapGet("/games", () => games);
+app.MapGet("/games/{id}",
+    (Guid id) =>
+    {
+        Game? game = games.Find(g => g.Id == id);
+        return game is null ? Results.NotFound() : Results.Ok(game);
+    }).WithName(GetGameEndpointName);
+
+app.MapPost("/games",
+    (Game game) =>
+    {
+       // if (string.IsNullOrWhiteSpace(game.Name))
+       // {
+       //     return Results.BadRequest("Name is required");
+       // }
+
+        game.Id = Guid.NewGuid();
+        games.Add(game);
+        return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id}, game);
+    });
+
+app.MapPut("/games/{id}",
+    (Guid id, Game game) =>
+    {
+        Game? existingGame = games.Find( g => g.Id == id);
+        if (existingGame is null)
+        {
+           return Results.NotFound("Game not found");
+        }
+
+        existingGame.Name = game.Name;
+        existingGame.Genre = game.Genre;
+        existingGame.Price = game.Price;
+        existingGame.ReleaseDate = game.ReleaseDate;
+
+        return Results.NoContent();
+    });
+
 
 app.Run();

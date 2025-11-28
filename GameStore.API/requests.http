@@ -18,3 +18,16 @@ Content-Type: application/json
   "price": 14.99,
   "releaseDate": "2016-02-26"
 }
+
+### Add Resident Evil 4 (POST)
+# Use this request to add "Resident Evil 4" to the in-memory store
+POST {{host}}/games
+Content-Type: application/json
+
+{
+  "id": "22222222-2222-2222-2222-222222222222",
+  "name": "Resident Evil 4",
+  "genre": "Survival Horror",
+  "price": 29.99,
+  "releaseDate": "2005-01-11"
+}
