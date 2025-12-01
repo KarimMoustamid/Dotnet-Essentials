@@ -10,12 +10,13 @@ namespace GameStore.API.Features.Games
     {
         public static void MapGames(this IEndpointRouteBuilder app)
         {
-            app.MapGet("/", () => "Hello World!");
-            app.MapGetGames();
-            app.MapGetGame();
-            app.MapCreateGame();
-            app.MapUpdateGame();
-            app.MapDeleteGame();
+            var group = app.MapGroup("/games");
+
+            group.MapGetGames();
+            group.MapGetGame();
+            group.MapCreateGame();
+            group.MapUpdateGame();
+            group.MapDeleteGame();
         }
     }
 }

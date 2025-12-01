@@ -8,7 +8,7 @@ namespace GameStore.API.Features.Games.UpdateGame
     {
         public static void MapUpdateGame(this IEndpointRouteBuilder app)
         {
-            app.MapPut("/games/{id}",
+            app.MapPut("/{id}",
                 (Guid id, GameStoreData store, UpdateGameDto gameDto) =>
                 {
                     var genre = store.GetGenreById(gameDto.GenreId);

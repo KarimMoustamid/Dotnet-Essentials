@@ -6,7 +6,8 @@ namespace GameStore.API.Features.Genres
     {
         public static void MapGenres(this IEndpointRouteBuilder app)
         {
-            app.MapGetGenres();
+            var group = app.MapGroup("/genres");
+            group.MapGetGenres();
         }
     }
 }

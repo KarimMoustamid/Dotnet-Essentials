@@ -7,7 +7,7 @@ namespace GameStore.API.Features.Games.GetGames
     {
         public static void MapGetGames(this IEndpointRouteBuilder app)
         {
-            app.MapGet("/games", (GameStoreData store) => store.GetAllGames()
+            app.MapGet("/", (GameStoreData store) => store.GetAllGames()
                 .Select(game => new GetGamesDto(
                     game.Id,
                     game.Name,

@@ -18,6 +18,7 @@ if (app.Environment.IsDevelopment())
 // ---------- CONTROLLERS ----------
 
 #region Controller
+app.MapGet("/", () => "Hello World!");
 app.MapGames();
 app.MapGenres();
 #endregion
