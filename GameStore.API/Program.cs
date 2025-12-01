@@ -101,19 +101,22 @@ app.MapPost("/games",
     }).WithParameterValidation();
 
 app.MapPut("/games/{id}",
-    (Guid id, Game game) =>
+    (Guid id, UpdateGameDto gameDto) =>
     {
+        var genre = genres.Find(g => g.Id == gameDto.GenreId);
+        if (genre is null) return Results.BadRequest("Invalid genre");
+
         Game? existingGame = games.Find( g => g.Id == id);
         if (existingGame is null)
         {
            return Results.NotFound("Game not found");
         }
 
-        existingGame.Name = game.Name;
-        existingGame.Genre = game.Genre;
-        existingGame.Price = game.Price;
-        existingGame.ReleaseDate = game.ReleaseDate;
-        existingGame.Description = game.Description;
+        existingGame.Name = gameDto.Name;
+        existingGame.Genre = genre;
+        existingGame.Price = gameDto.Price;
+        existingGame.ReleaseDate = gameDto.ReleaseDate;
+        existingGame.Description = gameDto.Description;
 
         return Results.NoContent();
     }).WithParameterValidation();
