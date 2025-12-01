@@ -1,3 +1,4 @@
+using GameStore.API.Data;
 using GameStore.API.Models;
 using GameStore.API.Dtos;
 var builder = WebApplication.CreateBuilder(args);
@@ -18,52 +19,13 @@ const string GetGameEndpointName = "GetGame";
 
 // ---------- DATA ----------
 
-#region DataModels
-List<Genre> genres = new List<Genre>
-{
-    new Genre { Id = Guid.NewGuid(), Name = "RPG" },
-    new Genre { Id = Guid.NewGuid(), Name = "Action RPG" },
-    new Genre { Id = Guid.NewGuid(), Name = "Roguelike" }
-};
-
-List<Game> games = new List<Game>
-{
-    new Game
-    {
-        Id = Guid.NewGuid(),
-        Name = "The Witcher 3: Wild Hunt",
-        Genre = genres[0],
-        Price = 39.99M,
-        Description = "Open-world action role-playing game set in a dark fantasy world.",
-        ReleaseDate = new DateOnly(2015, 5, 19)
-    },
-    new Game
-    {
-        Id = Guid.NewGuid(),
-        Name = "Cyberpunk 2077",
-        Genre = genres[1],
-        Price = 59.99M,
-        Description = "Futuristic open-world action RPG set in Night City.",
-        ReleaseDate = new DateOnly(2020, 12, 10)
-    },
-    new Game
-    {
-        Id = Guid.NewGuid(),
-        Name = "Hades",
-        Genre = genres[2],
-        Price = 24.99M,
-        Description = "Roguelike dungeon crawler where players fight through the underworld.",
-        ReleaseDate = new DateOnly(2020, 9, 17)
-    }
-};
-
-#endregion
-
+GameStoreData data = new();
 // ---------- CONTROLLERS ----------
 
 #region GameController
 app.MapGet("/", () => "Hello World!");
-app.MapGet("/games", () => games.Select(game => new GameSummaryDto(
+app.MapGet("/games", () => data.GetAllGames()
+    .Select(game => new GameSummaryDto(
     game.Id,
     game.Name,
     game.Genre?.Name ?? string.Empty,
@@ -74,7 +36,7 @@ app.MapGet("/games", () => games.Select(game => new GameSummaryDto(
 app.MapGet("/games/{id}",
     (Guid id) =>
     {
-        Game? game = games.Find(g => g.Id == id);
+        Game? game = data.GetGameById(id);
         return game is null ? Results.NotFound() : Results.Ok(new GameDetailsDto(
             game.Id, game.Name, game.Genre.Id, game.Price, game.ReleaseDate, game.Description));
     }).WithName(GetGameEndpointName);
@@ -82,7 +44,7 @@ app.MapGet("/games/{id}",
 app.MapPost("/games",
     (CreateGameDto gameDto) =>
     {
-        var genre = genres.Find(g => g.Id == gameDto.GenreId);
+        var genre = data.GetGenreById(gameDto.GenreId);
         if (genre is null) return Results.BadRequest("Invalid genre");
 
         var game = new Game()
@@ -95,7 +57,8 @@ app.MapPost("/games",
         };
 
         game.Id = Guid.NewGuid();
-        games.Add(game);
+        data.AddGame(game);
+
         return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id}, new GameDetailsDto(
             game.Id, game.Name, game.Genre.Id, game.Price, game.ReleaseDate, game.Description));
     }).WithParameterValidation();
@@ -103,10 +66,10 @@ app.MapPost("/games",
 app.MapPut("/games/{id}",
     (Guid id, UpdateGameDto gameDto) =>
     {
-        var genre = genres.Find(g => g.Id == gameDto.GenreId);
+        var genre = data.GetGenreById(gameDto.GenreId);
         if (genre is null) return Results.BadRequest("Invalid genre");
 
-        Game? existingGame = games.Find( g => g.Id == id);
+        Game? existingGame = data.GetGameById(id);
         if (existingGame is null)
         {
            return Results.NotFound("Game not found");
@@ -124,14 +87,14 @@ app.MapPut("/games/{id}",
 app.MapDelete("/games/{id}",
     (Guid id) =>
     {
-        games.RemoveAll(g => g.Id == id);
+        data.RemoveGame(id);
     });
 
 #endregion
 
 #region GemreController
 
-app.MapGet("/genres", () => genres.Select(g => new GenreDto(g.Id, g.Name)));
+app.MapGet("/genres", () => data.GetAllGenres().Select(g => new GenreDto(g.Id, g.Name)));
 
 #endregion
 
