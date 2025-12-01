@@ -47,22 +47,25 @@ List<Game> games = new List<Game>
 };
 
 app.MapGet("/", () => "Hello World!");
-app.MapGet("/games", () => games);
+app.MapGet("/games", () => games.Select(game => new GameSummaryDto(
+    game.Id,
+    game.Name,
+    game.Genre?.Name ?? string.Empty,
+    game.Price,
+    game.ReleaseDate
+)));
+
 app.MapGet("/games/{id}",
     (Guid id) =>
     {
         Game? game = games.Find(g => g.Id == id);
-        return game is null ? Results.NotFound() : Results.Ok(game);
+        return game is null ? Results.NotFound() : Results.Ok(new GameDetailsDto(
+            game.Id, game.Name, game.Genre.Id, game.Price, game.ReleaseDate, game.Description));
     }).WithName(GetGameEndpointName);
 
 app.MapPost("/games",
     (Game game) =>
     {
-       // if (string.IsNullOrWhiteSpace(game.Name))
-       // {
-       //     return Results.BadRequest("Name is required");
-       // }
-
         game.Id = Guid.NewGuid();
         games.Add(game);
         return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id}, game);
@@ -94,3 +97,20 @@ app.MapDelete("/games/{id}",
 
 
 app.Run();
+
+public record GameDetailsDto(
+    Guid Id,
+    string Name,
+    Guid GenreId,
+    decimal Price,
+    DateOnly ReleaseDate,
+    string Description
+    );
+
+public record GameSummaryDto(
+    Guid Id,
+    string Name,
+    string Genre,
+    decimal Price,
+    DateOnly ReleaseDate
+    );
