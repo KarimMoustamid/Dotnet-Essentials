@@ -1,6 +1,6 @@
 namespace GameStore.API.Dtos;
 
-public record GameDetailsDto(
+public record GetGameDto(
     Guid Id,
     string Name,
     Guid GenreId,

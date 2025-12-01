@@ -1,6 +1,7 @@
 using GameStore.API.Data;
 using GameStore.API.Models;
 using GameStore.API.Dtos;
+using GameStore.API.Features.Games.Constants;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,21 +17,12 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-const string GetGameEndpointName = "GetGame";
-
 // ---------- CONTROLLERS ----------
 
 #region GameController
 app.MapGet("/", () => "Hello World!");
 app.MapGetGames(app.Services.GetRequiredService<GameStoreData>());
-
-app.MapGet("/games/{id}",
-    (Guid id, GameStoreData data) =>
-    {
-        Game? game = data.GetGameById(id);
-        return game is null ? Results.NotFound() : Results.Ok(new GameDetailsDto(
-            game.Id, game.Name, game.Genre.Id, game.Price, game.ReleaseDate, game.Description));
-    }).WithName(GetGameEndpointName);
+app.MapGetGame(app.Services.GetRequiredService<GameStoreData>());
 
 app.MapPost("/games",
     (GameStoreData data, CreateGameDto gameDto) =>
@@ -50,7 +42,7 @@ app.MapPost("/games",
         game.Id = Guid.NewGuid();
         data.AddGame(game);
 
-        return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id}, new GameDetailsDto(
+        return Results.CreatedAtRoute(EndpointNames.GetGame, new { id = game.Id}, new GetGameDto(
             game.Id, game.Name, game.Genre.Id, game.Price, game.ReleaseDate, game.Description));
     }).WithParameterValidation();
 
