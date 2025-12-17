@@ -40,11 +40,14 @@ if (app.Environment.IsDevelopment())
 
 // ---------- CONTROLLERS ----------
 
-#region Controller
+#region Endpoints
 app.MapGet("/", () => "Hello World!");
 app.MapGames();
 app.MapGenres();
 #endregion
+
+app.MigrateDb();
+
 
 
 app.Run();
