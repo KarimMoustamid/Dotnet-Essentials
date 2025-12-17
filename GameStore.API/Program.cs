@@ -46,8 +46,7 @@ app.MapGames();
 app.MapGenres();
 #endregion
 
-app.MigrateDb();
-app.SeedData();
+app.InitializeDb();
 
 
 

@@ -9,6 +9,11 @@ namespace GameStore.API.Data
     /// </summary>
     public static class DataExtensions
     {
+        public static void InitializeDb(this WebApplication app)
+        {
+            app.MigrateDb();
+            app.SeedData();
+        }
         /// <summary>
         /// Run pending EF Core migrations at application startup.
         /// </summary>
@@ -20,7 +25,7 @@ namespace GameStore.API.Data
         /// This will not work in production if we have multiple instances of the app.
         /// In this case it is better to use a separate application for migrations.
         /// </remarks>
-        public static void MigrateDb(this WebApplication app)
+        private static void MigrateDb(this WebApplication app)
         {
             // Create a new IServiceScope so we can resolve scoped services (e.g. DbContext).
             // Resolving scoped services directly from the root provider is invalid.
@@ -39,7 +44,7 @@ namespace GameStore.API.Data
             // The using statement disposes the scope here, which disposes the DbContext.
         }
 
-        public static void SeedData(this WebApplication app)
+        private static void SeedData(this WebApplication app)
         {
             using var scope = app.Services.CreateScope();
             GameStoreContext dbContext = scope.ServiceProvider.GetRequiredService<GameStoreContext>();
