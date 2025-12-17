@@ -2,6 +2,7 @@ namespace GameStore.API.Data
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
+    using Models;
 
     /// <summary>
     /// Extension helpers for data-related startup tasks.
@@ -36,6 +37,23 @@ namespace GameStore.API.Data
             dbContext.Database.Migrate();
 
             // The using statement disposes the scope here, which disposes the DbContext.
+        }
+
+        public static void SeedData(this WebApplication app)
+        {
+            using var scope = app.Services.CreateScope();
+            GameStoreContext dbContext = scope.ServiceProvider.GetRequiredService<GameStoreContext>();
+
+            if (!dbContext.Genres.Any())
+            {
+                dbContext.Genres.AddRange(
+                    new Genre { Name = "RPG" },
+                    new Genre { Name = "Action RPG" },
+                    new Genre { Name = "Roguelike" }
+                    );
+
+                dbContext.SaveChanges();
+            }
         }
     }
 }
