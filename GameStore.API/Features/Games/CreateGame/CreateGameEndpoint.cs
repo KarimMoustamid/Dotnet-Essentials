@@ -10,28 +10,25 @@ namespace GameStore.API.Features.Games.CreateGame
         public static void MapCreateGame(this IEndpointRouteBuilder app)
         {
             app.MapPost("/",
-                (GameStoreData store, CreateGameDto gameDto, GameDataLogger logger) =>
+                (GameStoreContext dbContext, CreateGameDto gameDto, GameDataLogger logger) =>
                 {
-                    var genre = store.GetGenreById(gameDto.GenreId);
-                    if (genre is null) return Results.BadRequest("Invalid genre");
-
                     var game = new Game()
                     {
                         Name = gameDto.Name,
-                        Genre = genre,
-                        GenreId = genre.Id,
+                        GenreId = gameDto.GenreId,
                         Price = gameDto.Price,
                         ReleaseDate = gameDto.ReleaseDate,
                         Description = gameDto.Description
                     };
 
-                    game.Id = Guid.NewGuid();
-                    store.AddGame(game);
+                    dbContext.Games.Add(game);
+                    dbContext.SaveChanges();
+
 
                     logger.PrintGames();
 
                     return Results.CreatedAtRoute(EndpointNames.GetGame, new { id = game.Id}, new GameDetailsDto(
-                        game.Id, game.Name, game.Genre.Id, game.Price, game.ReleaseDate, game.Description));
+                        game.Id, game.Name, game.GenreId, game.Price, game.ReleaseDate, game.Description));
                 }).WithParameterValidation();
         }
     }
