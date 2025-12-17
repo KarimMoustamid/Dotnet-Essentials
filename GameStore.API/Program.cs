@@ -47,6 +47,7 @@ app.MapGenres();
 #endregion
 
 app.MigrateDb();
+app.SeedData();
 
 
 
