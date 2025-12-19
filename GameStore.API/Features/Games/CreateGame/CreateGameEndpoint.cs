@@ -12,10 +12,24 @@ namespace GameStore.API.Features.Games.CreateGame
             app.MapPost("/",
                 (GameStoreContext dbContext, CreateGameDto gameDto, GameDataLogger logger) =>
                 {
+                    // Validate GenreId was provided
+                    if (gameDto.GenreId == Guid.Empty)
+                    {
+                        return Results.BadRequest(new { error = "GenreId is required." });
+                    }
+
+                    // Ensure the Genre exists to avoid foreign-key constraint failures
+                    var genre = dbContext.Genres.Find(gameDto.GenreId);
+                    if (genre is null)
+                    {
+                        return Results.BadRequest(new { error = "Genre not found." });
+                    }
+
                     var game = new Game()
                     {
                         Name = gameDto.Name,
                         GenreId = gameDto.GenreId,
+                        Genre = genre,
                         Price = gameDto.Price,
                         ReleaseDate = gameDto.ReleaseDate,
                         Description = gameDto.Description
