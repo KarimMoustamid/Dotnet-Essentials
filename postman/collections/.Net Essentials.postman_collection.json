@@ -1,0 +1,204 @@
+{
+  "info": {
+    "_postman_id": "0af33463-5e49-4d9b-9e41-d41c707f9bde",
+    "name": ".Net Essentials",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Games",
+      "item": [
+        {
+          "name": "Index Page",
+          "id": "f534c53c-7928-4a0b-8cf4-8d42467dddaa",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{localhost}}",
+              "protocol": "http",
+              "host": [
+                "{{localhost}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Games List",
+          "id": "ee47fb4c-1d31-4094-8c9a-89f0d49bc0e4",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{localhost}}/games",
+              "protocol": "http",
+              "host": [
+                "{{localhost}}"
+              ],
+              "path": [
+                "games"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Game By Id",
+          "id": "25fb94dd-1906-44ac-ae29-e524a6956d41",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{localhost}}/games/0499A4FD-2AC2-4967-BDDA-70B5B635C539",
+              "protocol": "http",
+              "host": [
+                "{{localhost}}"
+              ],
+              "path": [
+                "games",
+                "0499A4FD-2AC2-4967-BDDA-70B5B635C539"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create a Game",
+          "id": "32b3beeb-27e3-4aa6-aa0e-a7cc4fd47757",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Resident Evil 10\",\n  \"GenreId\": \"2088aa33-f808-4607-ad91-c435fa4d2035\",\n  \"price\": 29.99,\n  \"releaseDate\": \"2005-01-11\",\n  \"Description\":\"Best Game\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{localhost}}/games",
+              "protocol": "http",
+              "host": [
+                "{{localhost}}"
+              ],
+              "path": [
+                "games"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update a Game",
+          "id": "3f4225c6-adfd-4513-9df9-1f961c6e0cf0",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\" : \"Resident Evil 9\",\n    \"genreId\": \"2088aa33-f808-4607-ad91-c435fa4d2035\",\n    \"Price\" : \"29.99\",\n    \"description\": \"Best Game\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{localhost}}/games/0499a4fd-2ac2-4967-bdda-70b5b635c539",
+              "protocol": "http",
+              "host": [
+                "{{localhost}}"
+              ],
+              "path": [
+                "games",
+                "0499a4fd-2ac2-4967-bdda-70b5b635c539"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete a Game",
+          "id": "bc23a8c3-c790-47e5-8774-c85abe567104",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://{{localhost}}/games/093ed5dc-1fbd-4cc5-b542-5808e6e6f746",
+              "protocol": "http",
+              "host": [
+                "{{localhost}}"
+              ],
+              "path": [
+                "games",
+                "093ed5dc-1fbd-4cc5-b542-5808e6e6f746"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "b8698cad-310b-4b31-8f13-cb7de2b59710"
+    },
+    {
+      "name": "Genre",
+      "item": [
+        {
+          "name": "Get All Generes",
+          "id": "0b58a31d-8015-459a-842d-d0a41aeb12ef",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{localhost}}/genres",
+              "protocol": "http",
+              "host": [
+                "{{localhost}}"
+              ],
+              "path": [
+                "genres"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "49a1a90d-edc9-4525-8c53-a8b0550bb82f"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "2de3fb96-715b-431a-9eb4-ffbab28e8ad3",
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "99eb97f0-0c5c-4989-8756-93397a81769d",
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "52389b81-e738-4b7c-969a-c25f4cf9e03b",
+      "key": "localhost",
+      "value": "localhost:5173",
+      "type": "string"
+    }
+  ]
+}
