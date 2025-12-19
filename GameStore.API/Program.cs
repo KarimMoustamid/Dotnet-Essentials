@@ -27,8 +27,6 @@ builder.Services.AddSqlite<GameStoreContext>(connectionString);
 //});
 
 builder.Services.AddOpenApi();
-builder.Services.AddScoped<GameDataLogger>();
-builder.Services.AddSingleton<GameStoreData>();
 
 var app = builder.Build();
 

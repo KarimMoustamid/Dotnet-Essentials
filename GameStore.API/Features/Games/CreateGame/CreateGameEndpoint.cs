@@ -10,7 +10,7 @@ namespace GameStore.API.Features.Games.CreateGame
         public static void MapCreateGame(this IEndpointRouteBuilder app)
         {
             app.MapPost("/",
-                (GameStoreContext dbContext, CreateGameDto gameDto, GameDataLogger logger) =>
+                (GameStoreContext dbContext, CreateGameDto gameDto) =>
                 {
                     // Validate GenreId was provided
                     if (gameDto.GenreId == Guid.Empty)
@@ -38,8 +38,6 @@ namespace GameStore.API.Features.Games.CreateGame
                     dbContext.Games.Add(game);
                     dbContext.SaveChanges();
 
-
-                    logger.PrintGames();
 
                     return Results.CreatedAtRoute(EndpointNames.GetGame, new { id = game.Id}, new GameDetailsDto(
                         game.Id, game.Name, game.GenreId, game.Price, game.ReleaseDate, game.Description));
