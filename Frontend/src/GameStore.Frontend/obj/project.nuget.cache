@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "AEpckBl7F1w=",
+  "success": true,
+  "projectFilePath": "/Users/karimmoustamid/Downloads/00-Essentials/Frontend/src/GameStore.Frontend/GameStore.Frontend.csproj",
+  "expectedPackageFiles": [
+    "/Users/karimmoustamid/.nuget/packages/microsoft.aspnetcore.components.webassembly.server/8.0.8/microsoft.aspnetcore.components.webassembly.server.8.0.8.nupkg.sha512",
+    "/Users/karimmoustamid/.nuget/packages/microsoft.netcore.app.ref/8.0.21/microsoft.netcore.app.ref.8.0.21.nupkg.sha512",
+    "/Users/karimmoustamid/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.21/microsoft.aspnetcore.app.ref.8.0.21.nupkg.sha512",
+    "/Users/karimmoustamid/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.21/microsoft.netcore.app.host.osx-arm64.8.0.21.nupkg.sha512"
+  ],
+  "logs": []
+}
