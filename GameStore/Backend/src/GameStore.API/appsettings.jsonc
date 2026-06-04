@@ -1,0 +1,27 @@
+/* ====================================================================
+ * Phase 1 — Building a REST API: Configuration
+ *
+ * This file holds the application settings for the Minimal API.
+ * At this phase, we keep configuration minimal:
+ *   - Logging controls are set so we see ASP.NET Core warnings.
+ *   - The In-Memory or SQLite database is the only external dependency.
+ *   - No message broker, no auth service, no external caches yet.
+ *
+ * Key insight: Configuration files grow with the architecture.
+ * Phase 1 deliberately omits complex sections (e.g., Kafka, Redis, JWT)
+ * that will appear in later phases. Compare this file across branches
+ * to see how configuration complexity mirrors architectural complexity.
+ * ==================================================================== */
+
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information", // Verbose logging for our code
+      "Microsoft.AspNetCore": "Warning", // Quieter framework logs — makes startup errors stand out
+    },
+  },
+  "AllowedHosts": "*", // Development-friendly; change to specific origins in production
+  "ConnectionStrings": {
+    "GameStore": "Data Source=GameStore.db", // SQLite file database — zero setup for learning phase
+  },
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  // Phase 1 — Minimal API endpoint routing.
+  // This file defines how the web server starts during development.
+  // Key concept: Multiple launch profiles let you switch between HTTP-only
+  // (faster), HTTPS (secure), and IIS Express (legacy Windows debugging).
+  // The `ASPNETCORE_ENVIRONMENT` environment variable tells ASP.NET Core
+  // which configuration set to load (e.g., Development, Staging, Production).
+  "iisSettings": {
+    "windowsAuthentication": false, // Disable Windows auth for simplicity
+    "anonymousAuthentication": true, // Allow unauthenticated requests during dev
+    "iisExpress": {
+      "applicationUrl": "http://localhost:21855",
+      "sslPort": 44366,
+    },
+  },
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false, // Prevent browser opening automatically
+      "applicationUrl": "http://localhost:5082",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development", // Minimal API endpoints can check this value
+      },
+    },
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "https://localhost:7077;http://localhost:5082", // Dual protocol binding
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+      },
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true, // IIS Express profile opens the browser by default
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+      },
+    },
+  },
+}

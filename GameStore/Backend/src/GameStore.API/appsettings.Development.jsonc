@@ -1,0 +1,13 @@
+{
+  // Phase 1 — Development configuration for the Minimal API REST endpoint.
+  // Controls logging verbosity; in development we want detailed logs
+  // for debugging, but we suppress Microsoft.AspNetCore warnings to
+  // reduce noise from framework internals (e.g., HTTP request/response)
+  // that are not relevant to learning about endpoint routing.
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information", // Log info+ messages from our code (and most third-party libs)
+      "Microsoft.AspNetCore": "Warning", // Only log warnings+ from ASP.NET Core internals
+    },
+  },
+}
