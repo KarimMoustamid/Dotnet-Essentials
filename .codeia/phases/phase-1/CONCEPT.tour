@@ -1,0 +1,48 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Phase 1 Concept Tour: Backend Domain Models",
+  "steps": [
+    {
+      "file": "ARCHITECTURE.md",
+      "line": 1,
+      "title": "Architecture overview — The domain layer foundation",
+      "description": "Phase 1 establishes the domain model — the core entities that represent the business concepts of a game store. We define `Game` and `Genre` inside the `GameStore.Api` project, which is part of the Backend solution. The models are placed in a `Models` namespace, following a Domain Model pattern. They are plain C# classes (POCOs) that later map to database tables via Entity Framework Core. This layer is database-agnostic and focuses on business meaning. \n\n**Active-recall question:** Why is it important to start building the domain model before writing any database or API code?"
+    },
+    {
+      "file": "Backend/Backend.sln",
+      "line": 1,
+      "title": "Solution organisation — Structural container",
+      "description": "The `.sln` file defines the Backend solution, which currently contains a single project `GameStore.Api` nested under a `src` folder. This is standard .NET practice: a solution groups related projects (e.g., different layers like API, Core, Infrastructure). Even though we only have one project now, the solution is ready for expansion. It decouples the logical grouping from the physical folder layout. \n\n**Active-recall question:** What advantage does a solution file provide over just having a single `.csproj`?"
+    },
+    {
+      "file": "Backend/src/GameStore.Api/GameStore.Api.csproj",
+      "line": 11,
+      "title": "Dependency foresight — Packages for future data access",
+      "description": "The project references `Microsoft.EntityFrameworkCore.Sqlite` and `Microsoft.EntityFrameworkCore.Design`. Even though Phase 1 doesn't use a database, these NuGet packages are already included. This is an architectural pre-step: we know the domain models will be persisted using Entity Framework Core with SQLite. Including the packages early makes the development environment ready for the next phases (DbContext, migrations) without configuration surprises. \n\n**Active-recall question:** How does adding EF Core packages now (instead of later) affect the project’s maintainability?"
+    },
+    {
+      "file": "Backend/src/GameStore.Api/Models/Genre.cs",
+      "line": 6,
+      "title": "Genre entity — Vocabulary of the domain",
+      "description": "`Genre` is a minimal entity: just an `Id` and a `Name`. It represents a classification (e.g., Action, RPG). By modelling it as a separate entity rather than embedding a string inside `Game`, we follow the Single Responsibility Principle. Genres can be reused, listed, and modified independently, and we avoid data duplication. The `Id` is a `Guid` to provide globally unique identifiers, which are safer in distributed systems and avoid integer auto‑increment conflicts. \n\n**Active-recall question:** What trade-offs exist between using a separate `Genre` entity versus just storing a genre string directly in the `Game` entity?"
+    },
+    {
+      "file": "Backend/src/GameStore.Api/Models/Game.cs",
+      "line": 7,
+      "title": "Game entity — Core aggregate root",
+      "description": "`Game` is the main entity. It includes a foreign key `GenreId` and a navigation property `Genre`. This dual property pattern is a common Entity Framework convention: the foreign key explicitly defines the relationship, while the navigation property enables easy access to the related object in code. The class enforces required fields (`Name`, `Description`) using the `required` keyword, ensuring integrity. `Price` is stored as `decimal` to avoid floating-point rounding errors common with money. `ReleaseDate` is `DateOnly`, reflecting that only the date part is meaningful. \n\n**Active-recall question:** Why does the `Game` entity contain both a `GenreId` (foreign key) and a `Genre` (navigation property)?"
+    },
+    {
+      "file": "Backend/src/GameStore.Api/Program.cs",
+      "line": 1,
+      "title": "Application host — Minimal API stub",
+      "description": "The `Program.cs` only initialises a `WebApplication` and calls `app.Run()`. It’s a placeholder. This shows the project is a .NET Web application (built on ASP.NET Core) but intentionally contains no endpoints or middleware yet. The design is incremental: we establish the domain model first, then later phases will add API endpoints, dependency injection, and database context. This approach keeps each phase focused. \n\n**Active-recall question:** What architectural principle is demonstrated by keeping the `Program.cs` almost empty in Phase 1?"
+    },
+    {
+      "file": "ARCHITECTURE.md",
+      "line": 1,
+      "title": "Synthesis — Domain model as the foundation of architecture",
+      "description": "The central architectural insight of Phase 1 is the **Domain Model Principle**: the core business logic and data structures should be defined independently of infrastructure, UI, or database. By creating `Game` and `Genre` as clean C# classes, we establish a shared language (Ubiquitous Language) that all future layers will depend upon. This gives us a stable inner core that changes less often than outer layers (like the web framework or database). The trade-off is that we must later invest effort to map these models to a database schema, but this separation pays off in testability and flexibility. \n\n**Active-recall question:** If we later needed to support multiple genres per game, how would you modify the domain model without breaking existing consumers of the Game API?"
+    }
+  ]
+}

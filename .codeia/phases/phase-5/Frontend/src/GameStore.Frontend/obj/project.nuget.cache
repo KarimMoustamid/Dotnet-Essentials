@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "j8oKxJm0VrQ=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\dev\\Code\\Dev\\Dotnet-Essentials\\.codeia\\phases\\phase-5\\Frontend\\src\\GameStore.Frontend\\GameStore.Frontend.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dev\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.server\\8.0.8\\microsoft.aspnetcore.components.webassembly.server.8.0.8.nupkg.sha512",
+    "C:\\Users\\dev\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.27\\microsoft.netcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\dev\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.27\\microsoft.windowsdesktop.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\dev\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.27\\microsoft.aspnetcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\dev\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.27\\microsoft.netcore.app.host.win-x64.8.0.27.nupkg.sha512"
+  ],
+  "logs": []
+}

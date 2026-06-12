@@ -1,0 +1,42 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Building Phase 1: Backend Domain Models",
+  "steps": [
+    {
+      "file": "Backend/Backend.sln",
+      "line": 1,
+      "title": "Create the solution file",
+      "description": "Set up the Visual Studio solution that will contain all backend projects. This solution references the GameStore.Api project and organizes it under a 'src' solution folder. Verify by opening the solution in Visual Studio or running `dotnet build` from the Backend folder."
+    },
+    {
+      "file": "Backend/src/GameStore.Api/GameStore.Api.csproj",
+      "line": 1,
+      "title": "Create the project file",
+      "description": "Configure the ASP.NET Core Web API project targeting .NET 8. Add NuGet packages: Microsoft.EntityFrameworkCore.Design, Microsoft.EntityFrameworkCore.Sqlite, and MinimalApis.Extensions. These will be used in later phases for data access and minimal API features. Verify by restoring packages and building the project (`dotnet restore` then `dotnet build`)."
+    },
+    {
+      "file": "Backend/src/GameStore.Api/Models/Genre.cs",
+      "line": 1,
+      "title": "Define the Genre entity",
+      "description": "Create the Genre domain model with an auto-generated Id (Guid) and a required Name property. This entity is independent and serves as the lookup for game genres. Verify compilation of the project — the class should be recognized in the namespace GameStore.Api.Models."
+    },
+    {
+      "file": "Backend/src/GameStore.Api/Models/Game.cs",
+      "line": 1,
+      "title": "Define the Game entity with foreign key",
+      "description": "Create the Game domain model. It includes Id, required Name, Description, Price, ReleaseDate, a GenreId foreign key (Guid), and a nullable navigation property Genre. The relationship will be configured in a later phase (DbContext). Verify that Game compiles and references Genre correctly (no circular dependency)."
+    },
+    {
+      "file": "Backend/src/GameStore.Api/Program.cs",
+      "line": 1,
+      "title": "Set up the minimal API entry point",
+      "description": "Boot the application using the minimal hosting model. At this phase, no endpoints or data are registered — just `CreateBuilder` and `app.Run()` to validate the project structure. Verify by running the app (it should start without errors and listen on a local port)."
+    },
+    {
+      "file": "ARCHITECTURE.md",
+      "line": 1,
+      "title": "Document the architecture diagram",
+      "description": "Review the architecture diagram that shows the relationship between the Backend solution, the GameStore.Api project, and the Game/Genre models. The diagram confirms the foreign key link from Game to Genre. Verify that the diagram matches the code structure — Game.GenreId is the FK to Genre.Id."
+    }
+  ]
+}

@@ -1,13 +1,22 @@
 {
   "version": 2,
-  "dgSpecHash": "AEpckBl7F1w=",
-  "success": true,
-  "projectFilePath": "/Users/karimmoustamid/Downloads/00-Essentials/Frontend/src/GameStore.Frontend/GameStore.Frontend.csproj",
+  "dgSpecHash": "wf5sTnBEMhs=",
+  "success": false,
+  "projectFilePath": "C:\\Users\\dev\\Code\\Dev\\Dotnet-Essentials\\Frontend\\src\\GameStore.Frontend\\GameStore.Frontend.csproj",
   "expectedPackageFiles": [
-    "/Users/karimmoustamid/.nuget/packages/microsoft.aspnetcore.components.webassembly.server/8.0.8/microsoft.aspnetcore.components.webassembly.server.8.0.8.nupkg.sha512",
-    "/Users/karimmoustamid/.nuget/packages/microsoft.netcore.app.ref/8.0.21/microsoft.netcore.app.ref.8.0.21.nupkg.sha512",
-    "/Users/karimmoustamid/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.21/microsoft.aspnetcore.app.ref.8.0.21.nupkg.sha512",
-    "/Users/karimmoustamid/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.21/microsoft.netcore.app.host.osx-arm64.8.0.21.nupkg.sha512"
+    "C:\\Users\\dev\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.27\\microsoft.netcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\dev\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.27\\microsoft.windowsdesktop.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\dev\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.27\\microsoft.aspnetcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\dev\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.27\\microsoft.netcore.app.host.win-x64.8.0.27.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Unable to get repository signature information for source https://api.nuget.org/v3-index/repository-signatures/5.0.0/index.json.\r\n  No connection could be made because the target machine actively refused it. (127.0.0.1:9)\r\n  No connection could be made because the target machine actively refused it.",
+      "projectPath": "C:\\Users\\dev\\Code\\Dev\\Dotnet-Essentials\\Frontend\\src\\GameStore.Frontend\\GameStore.Frontend.csproj",
+      "filePath": "C:\\Users\\dev\\Code\\Dev\\Dotnet-Essentials\\Frontend\\src\\GameStore.Frontend\\GameStore.Frontend.csproj",
+      "targetGraphs": []
+    }
+  ]
 }
