@@ -1,21 +1,22 @@
 # Phase 5 Architecture — Frontend API Clients
 
-The diagram illustrates the typed HTTP clients and the response-handling extension. GamesClient and GenresClient receive a shared HttpClient via dependency injection. GamesClient handles read operations (GET) by directly deserializing responses into models, while create/update/delete operations delegate to the static HttpResponseMessageExtensions, which produces a CommandResult and can parse RFC 7807 ProblemDetails for structured errors. GenresClient simply returns Genre arrays from the genres endpoint.
+The diagram shows two typed HTTP clients (GamesClient and GenresClient) that depend on an injected HttpClient to communicate with the backend API. Both clients use the HandleAsync extension method from HttpResponseMessageExtensions to transform HTTP responses into CommandResult objects, centralizing error handling.
 
 ```mermaid
 flowchart TD
-  subgraph Clients["Clients"]
-    GamesClient["GamesClient.cs"]
-    GenresClient["GenresClient.cs"]
-    Extensions["HttpResponseMessageExtensions.cs"]
+  subgraph Clients ["Clients (GameStore.Frontend.Clients)"]
+    Node1["GamesClient.cs"]
+    Node2["GenresClient.cs"]
+    Node3["HttpResponseMessageExtensions.cs"]
   end
-  HttpClient["HttpClient"] -->|injects| GamesClient
-  HttpClient -->|injects| GenresClient
-  GamesClient -->|"GET /games, GET /games/{id}"| GameSummaries["GameSummary[] / GameDetails"]
-  GenresClient -->|"GET /genres"| Genres["Genre[]"]
-  GamesClient -->|"POST / PUT / DELETE responses"| Extensions
-  Extensions -->|"converts response"| CommandResult["CommandResult"]
-  Extensions -->|"deserializes"| ProblemDetails["ProblemDetails"]
+  Node4["HttpClient (injected)"]
+  Node5["Backend API"]
+  Node1 -->|"injects"| Node4
+  Node2 -->|"injects"| Node4
+  Node1 -->|"calls HandleAsync"| Node3
+  Node2 -->|"calls HandleAsync"| Node3
+  Node1 -->|"makes HTTP requests"| Node5
+  Node2 -->|"makes HTTP requests"| Node5
 ```
 
 ---
