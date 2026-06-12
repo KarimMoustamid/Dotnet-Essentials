@@ -1,0 +1,6 @@
+{
+  "provider": "openai",
+  "model": "deepseek-v4-pro",
+  "apiUrl": "https://api.deepseek.com/v1",
+  "apiKey": "sk-04911329e7d444779c5235dafaad1547"
+}

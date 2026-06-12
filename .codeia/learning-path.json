@@ -1,0 +1,99 @@
+{
+  "overview": "This project is a game store application with an ASP.NET Core backend API (GameStore.Api) and a Blazor WebAssembly frontend (GameStore.Frontend). The backend uses Entity Framework Core for data access and follows a minimal API approach with feature folders. The frontend consumes the backend API through typed clients. The learning path splits the codebase into six incremental phases, starting with backend core types and progressively building up to the full frontend UI.",
+  "phases": [
+    {
+      "number": 1,
+      "title": "Backend Domain Models",
+      "keyConcept": "Define the core entities (Game and Genre) that represent the game store's data.",
+      "files": [
+        "Backend/src/GameStore.Api/Models/Game.cs",
+        "Backend/src/GameStore.Api/Models/Genre.cs",
+        "Backend/Backend.sln",
+        "Backend/src/GameStore.Api/GameStore.Api.csproj"
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Backend Data Layer",
+      "keyConcept": "Set up the database context and Entity Framework Core migrations to persist models.",
+      "files": [
+        "Backend/src/GameStore.Api/Data/GameStoreContext.cs",
+        "Backend/src/GameStore.Api/Data/DataExtensions.cs",
+        "Backend/src/GameStore.Api/Data/Migrations/20241029171209_InitialCreate.Designer.cs",
+        "Backend/src/GameStore.Api/Data/Migrations/20241029171209_InitialCreate.cs",
+        "Backend/src/GameStore.Api/Data/Migrations/GameStoreContextModelSnapshot.cs",
+        "Backend/Backend.sln",
+        "Backend/src/GameStore.Api/GameStore.Api.csproj"
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Backend API Endpoints",
+      "keyConcept": "Implement minimal API endpoints for games and genres, including CRUD operations and DTOs.",
+      "files": [
+        "Backend/src/GameStore.Api/Program.cs",
+        "Backend/src/GameStore.Api/Features/Games/Constants/EndpointNames.cs",
+        "Backend/src/GameStore.Api/Features/Games/CreateGame/CreateGameDtos.cs",
+        "Backend/src/GameStore.Api/Features/Games/CreateGame/CreateGameEndpoint.cs",
+        "Backend/src/GameStore.Api/Features/Games/DeleteGame/DeleteGameEndpoint.cs",
+        "Backend/src/GameStore.Api/Features/Games/GamesEndpoints.cs",
+        "Backend/src/GameStore.Api/Features/Games/GetGame/GetGameDtos.cs",
+        "Backend/src/GameStore.Api/Features/Games/GetGame/GetGameEndpoint.cs",
+        "Backend/src/GameStore.Api/Features/Games/GetGames/GetGamesDtos.cs",
+        "Backend/src/GameStore.Api/Features/Games/GetGames/GetGamesEndpoint.cs",
+        "Backend/src/GameStore.Api/Features/Games/UpdateGame/UpdateGameDtos.cs",
+        "Backend/src/GameStore.Api/Features/Games/UpdateGame/UpdateGameEndpoint.cs",
+        "Backend/src/GameStore.Api/Features/Genres/GenresEndpoints.cs",
+        "Backend/src/GameStore.Api/Features/Genres/GetGenres/GetGenresDtos.cs",
+        "Backend/src/GameStore.Api/Features/Genres/GetGenres/GetGenresEndpoint.cs",
+        "Backend/Backend.sln",
+        "Backend/src/GameStore.Api/GameStore.Api.csproj",
+        "Backend/src/GameStore.Api/appsettings.json",
+        "Backend/src/GameStore.Api/appsettings.Development.json",
+        "Backend/src/GameStore.Api/Properties/launchSettings.json"
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Frontend Models",
+      "keyConcept": "Define the client-side data types that mirror the backend DTOs for the Blazor application.",
+      "files": [
+        "Frontend/src/GameStore.Frontend/Models/CommandResult.cs",
+        "Frontend/src/GameStore.Frontend/Models/GameDetails.cs",
+        "Frontend/src/GameStore.Frontend/Models/GameSummary.cs",
+        "Frontend/src/GameStore.Frontend/Models/Genre.cs",
+        "Frontend/frontend.sln",
+        "Frontend/src/GameStore.Frontend/GameStore.Frontend.csproj"
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Frontend API Clients",
+      "keyConcept": "Create typed HttpClient clients and extensions to communicate with the backend API.",
+      "files": [
+        "Frontend/src/GameStore.Frontend/Clients/GamesClient.cs",
+        "Frontend/src/GameStore.Frontend/Clients/GenresClient.cs",
+        "Frontend/src/GameStore.Frontend/Clients/HttpResponseMessageExtensions.cs",
+        "Frontend/frontend.sln",
+        "Frontend/src/GameStore.Frontend/GameStore.Frontend.csproj"
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Frontend Web Application",
+      "keyConcept": "Wire up the Blazor app with dependency injection, layout styling, and static assets to form the complete UI.",
+      "files": [
+        "Frontend/src/GameStore.Frontend/Program.cs",
+        "Frontend/src/GameStore.Frontend/Components/Layout/MainLayout.razor.css",
+        "Frontend/src/GameStore.Frontend/Components/Pages/Home.razor.css",
+        "Frontend/src/GameStore.Frontend/wwwroot/app.css",
+        "Frontend/frontend.sln",
+        "Frontend/src/GameStore.Frontend/GameStore.Frontend.csproj",
+        "Frontend/src/GameStore.Frontend/appsettings.json",
+        "Frontend/src/GameStore.Frontend/appsettings.Development.json",
+        "Frontend/src/GameStore.Frontend/package-lock.json",
+        "Frontend/src/GameStore.Frontend/Properties/launchSettings.json"
+      ]
+    }
+  ]
+}
